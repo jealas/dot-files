@@ -13,11 +13,11 @@ __powerline() {
     readonly FG_WHITE="\[$(tput setaf 15)\]"
     readonly FG_BLACK="\[$(tput setaf 18)\]"
 
-    readonly BG_VENV="\[$(tput setab 19)\]"
-    readonly BG_DIRECTORY="\[$(tput setab 18)\]"
-    readonly BG_GIT="\[$(tput setab 8)\]"
+    readonly BG_VENV="\[$(tput setab 18)\]"
+    readonly BG_DIRECTORY="\[$(tput setab 8)\]"
+    readonly BG_GIT="\[$(tput setab 19)\]"
 
-    readonly BG_EXIT="\[$(tput setab 19)\]"
+    readonly BG_EXIT="\[$(tput setab 18)\]"
     readonly FG_EXIT_SUCCESS="\[$(tput setaf 2)\]"
     readonly FG_EXIT_FAIL="\[$(tput setaf 1)\]"
 
@@ -27,10 +27,15 @@ __powerline() {
     __git_info() { 
         [ -x "$(which git)" ] || return    # git not found
 
+        if [ ! -d ".git" ]; then
+          printf " $USER "
+          return
+        fi
+
         local git_eng="env LANG=C git"   # force git output in English to make our work easier
         # get current branch name or short SHA1 hash for detached head
         local branch="$($git_eng symbolic-ref --short HEAD 2>/dev/null || $git_eng describe --tags --always 2>/dev/null)"
-        [ -n "$branch" ] || return  # git branch not found
+        [ -n "$branch" ] || exit  # git branch not found
 
         local marks
 
