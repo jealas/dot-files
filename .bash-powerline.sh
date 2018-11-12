@@ -14,7 +14,7 @@ __powerline() {
     readonly FG_BLACK="\[$(tput setaf 18)\]"
 
     readonly BG_VENV="\[$(tput setab 18)\]"
-    readonly BG_DIRECTORY="\[$(tput setab 8)\]"
+    readonly BG_DIRECTORY="\[$(tput setab 7)\]"
     readonly BG_GIT="\[$(tput setab 19)\]"
 
     readonly BG_EXIT="\[$(tput setab 18)\]"
@@ -70,7 +70,7 @@ __powerline() {
 
         PS1="\n"
         PS1+="$BG_VENV$FG_WHITE$(__check_venv)$RESET"
-        PS1+="$BG_DIRECTORY$FG_WHITE \W $RESET"
+        PS1+="$BG_DIRECTORY$FG_BLACK \W $RESET"
         PS1+="$BG_GIT$FG_WHITE$(__git_info)$RESET"
         PS1+="$BG_EXIT$FG_EXIT $PS_SYMBOL $RESET "
     }
