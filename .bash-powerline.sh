@@ -27,7 +27,8 @@ __powerline() {
     __git_info() { 
         [ -x "$(which git)" ] || return    # git not found
 
-        if [ ! -d ".git" ]; then
+        git rev-parse --git-dir 2> /dev/null 1> /dev/null
+        if [ $? -ne 0 ]; then
           printf " $USER "
           return
         fi
