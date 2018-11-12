@@ -1,0 +1,32 @@
+[user]
+	email = jessealas94@gmail.com
+	name = Jesse Alas
+
+[alias]
+	ffs = flow feature start
+	fff = flow feature finish
+	ffco = flow feature checkout
+
+  ffr = flow feature rebase
+
+	frs = flow release start
+	frf = flow release finish
+
+	fhs = flow hotfix start
+	fhf = flow hotfix finish
+
+	mc = diff --name-only --diff-filter=U
+
+	co = checkout
+	ci = commit
+	st = status
+	br = branch
+	hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+	type = cat-file -t
+	dump = cat-file -p
+	rekt = reset HEAD~1
+  d = diff
+  ds = diff --staged
+  rhh = reset HEAD --hard
+[core]
+	editor = nvim
