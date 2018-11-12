@@ -3,36 +3,24 @@
 __powerline() {
 
     # Unicode symbols
-    readonly PS_SYMBOL_DARWIN=''
-    readonly PS_SYMBOL_LINUX='$'
-    readonly PS_SYMBOL_OTHER='%'
+    readonly PS_SYMBOL='$'
     readonly GIT_BRANCH_SYMBOL='⑂ '
     readonly GIT_BRANCH_CHANGED_SYMBOL='+'
     readonly GIT_NEED_PUSH_SYMBOL='⇡'
     readonly GIT_NEED_PULL_SYMBOL='⇣'
 
     # Color Scheme
-    readonly FG_BASE3="\[$(tput setaf 15)\]"
-    readonly BG_BASE1="\[$(tput setab 4)\]"
-    readonly BG_RED="\[$(tput setab 1)\]"
-    readonly BG_BLUE="\[$(tput setab 5)\]"
-    readonly BG_GREEN="\[$(tput setab 2)\]"
-    readonly BG_WHITE="\[$(tput setab 19)\]"
-    readonly FG_BLACK="\[$(tput setaf 7)\]"
+    readonly FG_WHITE="\[$(tput setaf 15)\]"
+    readonly FG_BLACK="\[$(tput setaf 18)\]"
+
+    readonly BG_DIRECTORY="\[$(tput setab 4)\]"
+    readonly BG_GIT="\[$(tput setab 5)\]"
+    readonly BG_VENV="\[$(tput setab 19)\]"
+
+    readonly BG_EXIT_SUCCESS="\[$(tput setab 2)\]"
+   readonly BG_EXIT_FAIL="\[$(tput setab 1)\]"
 
     readonly RESET="\[$(tput sgr0)\]"
-
-    # what OS?
-    case "$(uname)" in
-        Darwin)
-            readonly PS_SYMBOL=$PS_SYMBOL_DARWIN
-            ;;
-        Linux)
-            readonly PS_SYMBOL=$PS_SYMBOL_LINUX
-            ;;
-        *)
-            readonly PS_SYMBOL=$PS_SYMBOL_OTHER
-    esac
 
     __git_info() { 
         [ -x "$(which git)" ] || return    # git not found
@@ -68,16 +56,16 @@ __powerline() {
         # Check the exit code of the previous command and display different
         # colors in the prompt accordingly. 
         if [ $? -eq 0 ]; then
-            local BG_EXIT="$BG_GREEN"
+            local BG_EXIT="$BG_EXIT_SUCCESS"
         else
-            local BG_EXIT="$BG_RED"
+            local BG_EXIT="$BG_EXIT_FAIL"
         fi
 
         PS1="\n"
-        PS1+="$BG_WHITE$(__check_venv)$RESET"
-        PS1+="$BG_BASE1$FG_BASE3 \W $RESET"
-        PS1+="$BG_BLUE$FG_BASE3$(__git_info)$RESET"
-        PS1+="$BG_EXIT$FG_BASE3 $PS_SYMBOL $RESET "
+        PS1+="$BG_VENV$FG_WHITE$(__check_venv)$RESET"
+        PS1+="$BG_DIRECTORY$FG_WHITE \W $RESET"
+        PS1+="$BG_GIT$FG_WHITE$(__git_info)$RESET"
+        PS1+="$BG_EXIT$FG_WHITE $PS_SYMBOL $RESET "
     }
 
     PROMPT_COMMAND=ps1
