@@ -13,13 +13,15 @@ __powerline() {
     readonly FG_WHITE="\[$(tput setaf 15)\]"
     readonly FG_BLACK="\[$(tput setaf 18)\]"
 
-    readonly BG_DIRECTORY="\[$(tput setab 4)\]"
-    readonly BG_GIT="\[$(tput setab 5)\]"
     readonly BG_VENV="\[$(tput setab 19)\]"
+    readonly BG_DIRECTORY="\[$(tput setab 18)\]"
+    readonly BG_GIT="\[$(tput setab 8)\]"
 
-    readonly BG_EXIT_SUCCESS="\[$(tput setab 2)\]"
-   readonly BG_EXIT_FAIL="\[$(tput setab 1)\]"
+    readonly BG_EXIT="\[$(tput setab 19)\]"
+    readonly FG_EXIT_SUCCESS="\[$(tput setaf 2)\]"
+    readonly FG_EXIT_FAIL="\[$(tput setaf 1)\]"
 
+    readonly BOLD_TEXT="\[$(tput bold)]"
     readonly RESET="\[$(tput sgr0)\]"
 
     __git_info() { 
@@ -56,16 +58,16 @@ __powerline() {
         # Check the exit code of the previous command and display different
         # colors in the prompt accordingly. 
         if [ $? -eq 0 ]; then
-            local BG_EXIT="$BG_EXIT_SUCCESS"
+            local FG_EXIT="$FG_EXIT_SUCCESS"
         else
-            local BG_EXIT="$BG_EXIT_FAIL"
+            local FG_EXIT="$FG_EXIT_FAIL"
         fi
 
         PS1="\n"
         PS1+="$BG_VENV$FG_WHITE$(__check_venv)$RESET"
         PS1+="$BG_DIRECTORY$FG_WHITE \W $RESET"
         PS1+="$BG_GIT$FG_WHITE$(__git_info)$RESET"
-        PS1+="$BG_EXIT$FG_WHITE $PS_SYMBOL $RESET "
+        PS1+="$BG_EXIT$FG_EXIT $PS_SYMBOL $RESET "
     }
 
     PROMPT_COMMAND=ps1
