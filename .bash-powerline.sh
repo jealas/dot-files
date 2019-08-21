@@ -14,8 +14,12 @@ __powerline() {
     readonly FG_BLACK="\[$(tput setaf 18)\]"
 
     readonly BG_VENV="\[$(tput setab 18)\]"
+    readonly FG_VENV="\[$(tput setaf 3)\]"
+
     readonly BG_DIRECTORY="\[$(tput setab 7)\]"
     readonly BG_GIT="\[$(tput setab 19)\]"
+    readonly FG_GIT_AHEAD="\[$(tput setaf 12)\]"
+    readonly FG_GIT_BEHIND="\[$(tput setaf 13)\]"
 
     readonly BG_EXIT="\[$(tput setab 18)\]"
     readonly FG_EXIT_SUCCESS="\[$(tput setaf 2)\]"
@@ -47,8 +51,8 @@ __powerline() {
         local stat="$($git_eng status --porcelain --branch | grep '^##' | grep -o '\[.\+\]$')"
         local aheadN="$(echo $stat | grep -o 'ahead [[:digit:]]\+' | grep -o '[[:digit:]]\+')"
         local behindN="$(echo $stat | grep -o 'behind [[:digit:]]\+' | grep -o '[[:digit:]]\+')"
-        [ -n "$aheadN" ] && marks+=" $GIT_NEED_PUSH_SYMBOL$aheadN"
-        [ -n "$behindN" ] && marks+=" $GIT_NEED_PULL_SYMBOL$behindN"
+        [ -n "$aheadN" ] && marks+=" $FG_GIT_AHEAD$GIT_NEED_PUSH_SYMBOL$aheadN"
+        [ -n "$behindN" ] && marks+=" $FG_GIT_BEHIND$GIT_NEED_PULL_SYMBOL$behindN"
 
         # print the git branch segment without a trailing newline
         printf " $GIT_BRANCH_SYMBOL$branch$marks "
@@ -70,7 +74,7 @@ __powerline() {
         fi
 
         PS1="\n"
-        PS1+="$BG_VENV$FG_WHITE$(__check_venv)$RESET"
+        PS1+="$BG_VENV$FG_VENV$(__check_venv)$RESET"
         PS1+="$BG_DIRECTORY$FG_BLACK \W $RESET"
         PS1+="$BG_GIT$FG_WHITE$(__git_info)$RESET"
         PS1+="$BG_EXIT$FG_EXIT $PS_SYMBOL $RESET "

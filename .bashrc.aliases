@@ -19,3 +19,5 @@ if [[ $LANG = '' ]]; then
 	export LANG=en_US.UTF-8
 fi
 
+alias p3='python3'
+alias gdb='gdb -tui'

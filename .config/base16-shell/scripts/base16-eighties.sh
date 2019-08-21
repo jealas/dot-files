@@ -31,7 +31,7 @@ color19="51/51/51" # Base 02
 color20="a0/9f/93" # Base 04
 color21="e8/e6/df" # Base 06
 color_foreground="d3/d0/c8" # Base 05
-color_background="2d/2d/2d" # Base 00
+color_background="2c/2c/2c" # Base 00
 color_cursor="d3/d0/c8" # Base 05
 
 if [ -n "$TMUX" ]; then

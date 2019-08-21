@@ -29,8 +29,8 @@ let g:airline#extensions#tabline#enabled = 1
 
 let g:deoplete#enable_at_startup = 1
 
-" Set relative numbers.
-set relativenumber
+" Set hybrid relative numbers.
+set number relativenumber
 
 " Every tab is 4 spaces.
 set tabstop=4 shiftwidth=4 expandtab

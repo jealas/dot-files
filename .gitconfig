@@ -19,6 +19,8 @@
 
 	co = checkout
 	ci = commit
+  cim = commit -m
+  cia = commit --amend
 	st = status
 	br = branch
 	hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
@@ -28,5 +30,6 @@
   d = diff
   ds = diff --staged
   rhh = reset HEAD --hard
+
 [core]
 	editor = nvim
