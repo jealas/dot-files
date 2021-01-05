@@ -3,7 +3,6 @@
 __powerline() {
 
     # Unicode symbols
-    readonly PS_SYMBOL='$'
     readonly GIT_BRANCH_SYMBOL='⑂ '
     readonly GIT_BRANCH_CHANGED_SYMBOL='+'
     readonly GIT_NEED_PUSH_SYMBOL='⇡'
@@ -67,10 +66,13 @@ __powerline() {
     ps1() {
         # Check the exit code of the previous command and display different
         # colors in the prompt accordingly. 
-        if [ $? -eq 0 ]; then
+        local exit_code=$?;
+        if [ $exit_code -eq 0 ]; then
             local FG_EXIT="$FG_EXIT_SUCCESS"
+            local PS_SYMBOL='$'
         else
             local FG_EXIT="$FG_EXIT_FAIL"
+            local PS_SYMBOL="${exit_code}"
         fi
 
         PS1="\n"
